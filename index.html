@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>huning's hut</title><meta name="author" content="huning"><meta name="copyright" content="huning"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="huning&#39;s hut">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="huning&#39;s hut">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg">
+<meta property="article:author" content="huning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg"><link rel="shortcut icon" href="https://s2.loli.net/2024/06/06/Z9Iz2rNsJq7ihRA.jpg"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'huning\'s hut',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://s2.loli.net/2025/05/06/vZgaW8w42hcCjDm.png);"></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://s2.loli.net/2025/05/06/SqJKFkoDCVnbiHX.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">huning's hut</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">huning's hut</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/05/06/Leetcode&amp;%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%9D%E8%80%83/" title="Leetcode&amp;洛谷刷题记录与思考">Leetcode&amp;洛谷刷题记录与思考</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-05-06T10:47:42.000Z" title="Created 2025-05-06 18:47:42">2025-05-06</time></span></div><div class="content">Leetcode&amp;&amp;洛谷刷题记录与思考p 7517题目链接：  对于第一篇题解的理解。 ··· 12345678910111213141516171819202122232425262728293031323334353637#include&lt;bits/stdc++.h&gt;#define ll long long#define il inlineusing namespace std;const int N=5e5+10;int read()&#123;//没有多大用的快读    int f=1,s=0;    char x=getchar();    while(x&lt;&#x27;0&#x27;||x&gt;&#x27;9&#x27;)&#123;        if(x==&#x27;-&#x27;) f=-1;        x=getchar();    &#125;    while(x&gt;=&#x27;0&#x27;&amp;&amp;x&lt;=&#x27;9&#x27;)&#123;       ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="手写RPC框架学习">手写RPC框架学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-05-05T06:12:50.000Z" title="Created 2025-05-05 14:12:50">2025-05-05</time></span></div><div class="content">手写RPC框架学习什么是RPCRPC(Remote Procedure Call)从字面意思就是远程程序请求, 我的理解就是, 将能够分离的服务进行解耦合, 暴露出接口, 让其他服务能够通过网络直接请求调用. 能够降低服务之间的耦合度, 防止崩溃, 同时提高服务的可维护程度. 通过RPC框架甚至不需要构建http请求, 相当与是RPC框架提供了一个方法, 隐藏了构建http请求的过程, 只需要关注传入的参数, 和传回的数据就足够了.  关于RPC的一些问题目前我理解的RPC框架相当于是一个引入的包, 通过调用相关的方法就能够直接访问相关的服务, 当然对于服务方应该也是使用相同的协议的. 写RPC框架就像是在写一个现成的包一样, 其他服务通过应用这个包, 然后使用这个包中的工具, 就可以实现RPC的功能. yu-RPC简易版初始化结构构建了四个模块exam-consumer,exam-provider, example-common, yu-rpc-easy. 取模拟三个端口, 其中的common模块相当于是公共模块,  使用rpc框架构成服务, 在消费者和生产者之间提供桥梁,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习">Hgame2025赛后学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-07T08:45:22.000Z" title="Created 2025-03-07 16:45:22">2025-03-07</time></span></div><div class="content">Hgame2025赛后学习​	在发现自己的网络安全知识非常的低下后，也就不再现在ctf这条赛道上进行苦卷了，更多地把他看作是各种高级封装开发外的对计算机技术底层的一种兴趣认知。所以也不太好意思说这是我的赛后总结, 毕竟也就做出来那么两道题, 其他的就根本不行了, 可见和众多师傅相比我的计算机水平十分的有限, 所以就把这比赛当作是认知新技术的一种契机了. webBandBomb做题经历​	第一次尝试web的题, 最终还是没有做出来. 通过阅读给出的服务器代码, 可以知道有一个接口/rename在后面的使用中应该会有用处, 推测可以根据请求对相关文件进行更改. 由于做misc的经验, 所以我以为会有一个相关的flag文件放在服务器上, 需要更改使其进行显示. 但是由于没有学过ejs的技术, 所以完全不知道这道题的用意了. ​	同时, 在为运行中的web服务设置环境变量也属于是在我的技术水平之外了. 相关细节​	通过阅读服务的代码, 可以知道, template的名字为motis同时, 是处在默认的ejs文件夹下的, 所有做题思路是自己编写相关的服务器文件,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/07/Go%E5%85%AB%E8%82%A1/" title="Go八股">Go八股</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-07T08:43:36.000Z" title="Created 2025-03-07 16:43:36">2025-03-07</time></span></div><div class="content">Go八股有限状态机也叫有限自动状态机, 写过dp的话, 其实就说明已经用到过了, 本质上就是一个状态转换成另一个状态, 状态之间可以双向也可以单向, 同时也有纯粹的只进不出的状态, 也许是故意设计成这样的, 避免一个错误产生后, 程序仍然继续运行, 感觉会用在一些比较特殊的业务场景, 需要重新启动估计. 对于不需要重新启动的业务, 感觉在加一个处理异常的状态, 再重新转换回正常的状态即可.参考这篇文章有限状态机FSM(finite state machine) 一_fsm statemachine-CSDN博客 同时文章中提到了, 如果只是使用if-else语句进行判断, 最后会造成代码的不可读性. 通过使用一个通用的方法, 是比较好的办法. 通过定义一个抽象类statusBase, 在其中定义三个抽象方法OnEnter , OnExecute和OnExit. 对于每个状态去具体的实现这是三个方法从而实现不同状态的转移, 提高代码的可读性. 1234567891011121314151617181920212223242526272829public abstract...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/05/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8D%A3%E9%BC%93%E6%8C%87%E5%8C%97/" title="Linux云服务器捣鼓指北">Linux云服务器捣鼓指北</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-05T06:08:52.000Z" title="Created 2025-03-05 14:08:52">2025-03-05</time></span></div><div class="content">Linux云服务器捣鼓指北个人前言在想到写着捣鼓的经历记录的时候, 由于自己不成熟的操作, 和健忘的记性, 已经多次将自己的服务器系统重置, 已经重置第二遍哩! 本着认真工作, 踏实学习的原则, 本人认为, 这样对待服务器是十分不可取的, 毕竟目前这台服务器还是我自己的实验型服务器, 我可以随便折腾, 同时我在服务器上也没有重要文件或者是什么高端的服务, 所以我可以没有任何心理负担的删库跑路, 但是先要成为一个优秀的对对服务有用的人, 这样的做法显然是可耻的. 对此,本人在此对每次进行的操作进行一定的记录和思考, 提供学习和参考. 同时也对看到这篇文章的小白提供一个思路. 通过远程SSH连接使用云服务器本人遵从前辈的教导,通过使用远程的SSH远程连接服务使用云服务器. 使用Xshell新建会话,然后通过root用户进行登录.当然输入的密码就是我自己服务器设置的密码. 但是要在此注意, 这样登录进去的用户肯定是root用户, root用户在进行操作的时具有很强的危险性, 一般需要新建用户进行操作,同时需要更改权限. 部署网站服务器核心跟着鱼皮大佬的教程,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/05/%E6%9D%AD%E7%94%B5%E5%8A%A9%E6%89%8B%E5%90%8E%E7%AB%AF%E4%BA%8C%E9%9D%A2%E7%BB%8F%E5%8E%86/" title="杭电助手后端二面经历">杭电助手后端二面经历</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-05T06:06:58.000Z" title="Created 2025-03-05 14:06:58">2025-03-05</time></span></div><div class="content">杭电助手后端二面经历在杭电助手的开发是基于Go语言的. 对于程序来说, 其实用什么语言写的对于程序员的影响只局限于对语言的熟悉程度和开发的效率. 所以, 虽然在此之前, 我对Go语言的涉猎只局限于安装和运行了Helloworld. 这次的二面项目的构建, 是一个很好的机会, 让我去熟悉Go语言的应用, 这与当今许多公司的后端开发相关性非常强. Go语言的初步认识在我的印象中, Go语言的介绍是为了能够综合Java多平台和C++高粒度创造出的语言, 同时也摈弃了一些这两种语言的弊端, 作为一种新兴的语言, 在很多公司的后端开发中都得到了大规模的应用. 作为之中面向对象的语言, Go语言虽然目前我并没有学到他的类, 但是, 从最开始的mod来说, Go应该是基于一个包与包之间相互调用进行运行的. 当我在一个项目的文件加下, 同时写了两个main函数的时候, 语言会提示报错.  对于Go语言来说，每个包中的方法都是以大写字母开头的，...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/03/Java/" title="Java">Java</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-03-03T15:53:06.000Z" title="Created 2025-03-03 23:53:06">2025-03-03</time></span></div><div class="content">Java println和print的区别在于前者在输出后自动添加换行, 后者则没有.  在创建一个对象时new关键字在于重新创造一个对象, 如果直接创建一个对象, 创建对象的值在Java string的内存池内如果存在, 该对象会直接指向这个值.好像是在内存池中创建一个常量而已, 如果在常量池中有, 就直接将这个常量赋值, 否则就在常量池里再创建一个常量.(但是这样在内存池中创建多个相同的常量又有什么意义呢?)  在scaner类中, Scaner.next()一定要读到有效字符后才可以结束.对有效字符之前遇到的空白会自动将其去除, 将有效字符后的空白作为结束符(就是不能输入含有空格的字符串)  scaner.nextLIne()以回车符为结束的标志.   scaner类中有hasNextXXX进行判断是否还有继续输入.    Springboot开发前言​	之前经过杭电助手后端的二面, 使用Gin框架开发了一个web应用. 已经可以可以体会到, 一个框架对于应用开发效率的提升, 再开发过程中节省了很多需要去配置相关依赖的过程,...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/10/08/%E6%9D%AD%E7%94%B5%E5%8A%A9%E6%89%8B%E5%90%8E%E7%AB%AF%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" title="杭电助手后端面试总结">杭电助手后端面试总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2024-10-08T15:40:54.000Z" title="Created 2024-10-08 23:40:54">2024-10-08</time></span></div><div class="content">杭电助手后端面试总结前言经过了长达两个星期的招新流程，虽然很遗憾，并没有被成功录取，但是也很幸运能够在这次面试中学到了很多的东西，进一步深化了自己的理解，不止是停留在了解概念的阶段。不管是否进入了后端部，这里都并不是我的终点，所以，再次进行总结，根据在二面期间写下的经历与问题总结而成,为以后能够成功拿下大厂offer做好准备. 关于二面的任务对于一面来说, 主要只是考察面试人员的面貌的, 所以并不是技术的重点.  二面的任务是上线一个校园问答系统, 要求根据相关的场景, 分析具体需求, 编写相关的接口. 通过简单的分析, 对于这个系统的需求, 最基础的功能肯定是  能够实现用户登录与注册 能够提出问题 能够回答问题 能够查找相关问题  在这些基础上, 对相关功能的实现进行相关场景的更加细化的设计. 同时, 由于要设计相关的数据表格, 所以根据要实现的功能设计相关的数据库表也是十分重要的.  关于后端的一些认识的提升在做这个项目之前, 虽然我早就对前后端分别要干什么事已经有了一定的了解. 但是对于接口这个概念也只是停留在印象里. 我认为, 由于后端处理的是传输回来的数据的处理,...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">huning</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/06/Leetcode&amp;%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%9D%E8%80%83/" title="Leetcode&amp;洛谷刷题记录与思考">Leetcode&amp;洛谷刷题记录与思考</a><time datetime="2025-05-06T10:47:42.000Z" title="Created 2025-05-06 18:47:42">2025-05-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="手写RPC框架学习">手写RPC框架学习</a><time datetime="2025-05-05T06:12:50.000Z" title="Created 2025-05-05 14:12:50">2025-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习">Hgame2025赛后学习</a><time datetime="2025-03-07T08:45:22.000Z" title="Created 2025-03-07 16:45:22">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Go%E5%85%AB%E8%82%A1/" title="Go八股">Go八股</a><time datetime="2025-03-07T08:43:36.000Z" title="Created 2025-03-07 16:43:36">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/05/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8D%A3%E9%BC%93%E6%8C%87%E5%8C%97/" title="Linux云服务器捣鼓指北">Linux云服务器捣鼓指北</a><time datetime="2025-03-05T06:08:52.000Z" title="Created 2025-03-05 14:08:52">2025-03-05</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/05/">
+            <span class="card-archive-list-date">
+              May 2025
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              March 2025
+            </span>
+            <span class="card-archive-list-count">5</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/10/">
+            <span class="card-archive-list-date">
+              October 2024
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">8</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-05-18T17:34:28.557Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By huning</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

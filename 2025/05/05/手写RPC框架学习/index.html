@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>手写RPC框架学习 | huning's hut</title><meta name="author" content="huning"><meta name="copyright" content="huning"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="手写RPC框架学习什么是RPCRPC(Remote Procedure Call)从字面意思就是远程程序请求, 我的理解就是, 将能够分离的服务进行解耦合, 暴露出接口, 让其他服务能够通过网络直接请求调用. 能够降低服务之间的耦合度, 防止崩溃, 同时提高服务的可维护程度. 通过RPC框架甚至不需要构建http请求, 相当与是RPC框架提供了一个方法, 隐藏了构建http请求的过程, 只需要关注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写RPC框架学习">
+<meta property="og:url" content="http://example.com/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="huning&#39;s hut">
+<meta property="og:description" content="手写RPC框架学习什么是RPCRPC(Remote Procedure Call)从字面意思就是远程程序请求, 我的理解就是, 将能够分离的服务进行解耦合, 暴露出接口, 让其他服务能够通过网络直接请求调用. 能够降低服务之间的耦合度, 防止崩溃, 同时提高服务的可维护程度. 通过RPC框架甚至不需要构建http请求, 相当与是RPC框架提供了一个方法, 隐藏了构建http请求的过程, 只需要关注">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg">
+<meta property="article:published_time" content="2025-05-05T06:12:50.000Z">
+<meta property="article:modified_time" content="2025-05-06T11:56:52.000Z">
+<meta property="article:author" content="huning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "手写RPC框架学习",
+  "url": "http://example.com/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/",
+  "image": "https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg",
+  "datePublished": "2025-05-05T06:12:50.000Z",
+  "dateModified": "2025-05-06T11:56:52.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "huning",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://s2.loli.net/2024/06/06/Z9Iz2rNsJq7ihRA.jpg"><link rel="canonical" href="http://example.com/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '手写RPC框架学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://s2.loli.net/2025/05/06/vZgaW8w42hcCjDm.png);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2024/06/06/9e4chpZGmvuM8CT.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">huning's hut</span></a><a class="nav-page-title" href="/"><span class="site-name">手写RPC框架学习</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">手写RPC框架学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-05-05T06:12:50.000Z" title="Created 2025-05-05 14:12:50">2025-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-05-06T11:56:52.000Z" title="Updated 2025-05-06 19:56:52">2025-05-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="手写RPC框架学习"><a href="#手写RPC框架学习" class="headerlink" title="手写RPC框架学习"></a>手写RPC框架学习</h1><h2 id="什么是RPC"><a href="#什么是RPC" class="headerlink" title="什么是RPC"></a>什么是RPC</h2><p>RPC(Remote Procedure Call)从字面意思就是远程程序请求, 我的理解就是, 将能够分离的服务进行解耦合, 暴露出接口, 让其他服务能够通过网络直接请求调用. 能够降低服务之间的耦合度, 防止崩溃, 同时提高服务的可维护程度.</p>
+<p>通过RPC框架甚至不需要构建http请求, 相当与是RPC框架提供了一个方法, 隐藏了构建http请求的过程, 只需要关注传入的参数, 和传回的数据就足够了.</p>
+<p><img src="/img/RPC%E6%B5%81%E7%A8%8B%E5%9B%BE.png"></p>
+<h2 id="关于RPC的一些问题"><a href="#关于RPC的一些问题" class="headerlink" title="关于RPC的一些问题"></a>关于RPC的一些问题</h2><p>目前我理解的RPC框架相当于是一个引入的包, 通过调用相关的方法就能够直接访问相关的服务, 当然对于服务方应该也是使用相同的协议的.</p>
+<p>写RPC框架就像是在写一个现成的包一样, 其他服务通过应用这个包, 然后使用这个包中的工具, 就可以实现RPC的功能.</p>
+<h2 id="yu-RPC简易版"><a href="#yu-RPC简易版" class="headerlink" title="yu-RPC简易版"></a>yu-RPC简易版</h2><h3 id="初始化结构"><a href="#初始化结构" class="headerlink" title="初始化结构"></a>初始化结构</h3><p>构建了四个模块exam-consumer,exam-provider, example-common, yu-rpc-easy. 取模拟三个端口, 其中的common模块相当于是公共模块,  使用rpc框架构成服务, 在消费者和生产者之间提供桥梁, 相当与中间注册机. </p>
+<h3 id="common"><a href="#common" class="headerlink" title="common"></a>common</h3><p>模块中编写User类实现Serializable接口, 该接口包含了 将数据进行序列化的方法, 节省开发时间.</p>
+<p>在接口服务中定义getUser接口,</p>
+<h3 id="关于Java的一些包"><a href="#关于Java的一些包" class="headerlink" title="关于Java的一些包"></a>关于Java的一些包</h3><h4 id="lombok"><a href="#lombok" class="headerlink" title="lombok"></a>lombok</h4><p>​	lombok会提供一些代码的模板, 通过调用相关的注解自动生成一些方法. 在Java开发中, 会统一为一个方法开发set和get方法, 但是这些方法其实比较固定, 只需要固定生成就行, 通过应用lombok包中的@Getter等注解就可以快速生成.</p>
+<h4 id="hutool"><a href="#hutool" class="headerlink" title="hutool"></a>hutool</h4><p>​	hutool就相当一个工具包, 集成了许多可以用到的工具, 方便开发, 提升开发者的开发效率.</p>
+<h3 id="RPC框架中provider方面"><a href="#RPC框架中provider方面" class="headerlink" title="RPC框架中provider方面"></a>RPC框架中provider方面</h3><p>RPC服务中, 其实是否为privider提供创建服务器, 觉得可能还是很重要的, 为的就是有一个统一的协议.</p>
+<p>注册中心和本地注册器的区别. 本地注册器是用于管理本地的注册方法的, 接受请求,分析请求的方法然后调用处理. 注册中心的作用是将获得的请求, 转发给合适的provider.</p>
+<p>本项目中用到了很多Vertx框架下的知识, 对该框架还并不是非常熟悉. </p>
+<p>​	要注意RPC框架是提供给开发者使用的，不论是consumer还是provider,都是开发者，其作用只是将两个服务解耦，而非是产品服务。通过在开发中，双方引入common模块，将一些注册信息。<br>​	consumer通过RPC框架提供的方法将参数包装成请求，通过common中提供的一些注册信息选择服务。provider解析到本地注册器，处理完数据后，通过response返回数据。</p>
+<h3 id="全局配置的添加"><a href="#全局配置的添加" class="headerlink" title="全局配置的添加"></a>全局配置的添加</h3><p>在RPC框架包中添加, 配置文件.properties, 同时定义一个相应的.class对象接收它. 在RpcApplication中定义了一个全局变量(volatile) RpcConfig. 同时定义了两个init方法, 分别代表默认配置和自定义配置. 再定义了一个getConfig的方法, 获取config. 这些变量和方法都是static类型, 当包引用时就可以直接调用, 无需创建相关的的.class对象.</p>
+<h3 id="mock服务的添加"><a href="#mock服务的添加" class="headerlink" title="mock服务的添加"></a>mock服务的添加</h3><h4 id="目前我理解的mock服务"><a href="#目前我理解的mock服务" class="headerlink" title="目前我理解的mock服务"></a>目前我理解的mock服务</h4><p>其实在api测试中也已经用到了mock. 当时相当于是接口需要构造相关的请求, 填写参数, 然后模拟正常的接口请求. 在RPC中的mock估计远不止于此. 由于是一个服务向另一个服务发送请求, 当另一个服务还没有开发完成的时候, 直接通过RPC向其请求肯定是没有用的. 但是RPC框架带来的, 就是只需要关注参数和返回, 而不需要具体的实现. 只需要能够模拟参数和返回即可. mock相当于就是构造了一个接收和返回的功能. 其返回的数据是, 预期中正确的示例数据.  主要作用是为了能够测试当前编写的模块能否正常运行.</p>
+<h3 id="关于consumer端的服务代理"><a href="#关于consumer端的服务代理" class="headerlink" title="关于consumer端的服务代理"></a>关于consumer端的服务代理</h3><p>RPC框架相当于是consumer与provider之间协商的一个协议. 两者都会应用common模块. 在common模块中, 包含这一些接口. 不同的是, 对于provider需要实现这些抽象类的接口, 而consumer是直接调用这其中的接口.<br>光有包含接口的模块肯定是无法运行的, 所以需要相关的实现类. 但是如果直接将provider编写的Impl粘贴过来也就不需要RPC了. 所以在consumer端需要的是编写代理类去实现这个接口, 也就是在consumer端, 这个接口的实现不会是处理相关的数据, 而只是构造了一个网络请求, 将参数发送到provider那去.</p>
+<h4 id="静态请求"><a href="#静态请求" class="headerlink" title="静态请求"></a>静态请求</h4><p>就是直接根据信息构造请求, 但是这样做的话工作量太大. 应该将能够固定程式化的部分尽可能的固定.比如用户只需要关注传入参数即可.<br>对于一个请求最重要的无非一下几点</p>
+<ol>
+<li>服务提供商的相关信息</li>
+<li>需要调用的服务名称</li>
+<li>提供的参数</li>
+</ol>
+<p>返回的结果为</p>
+<ol>
+<li>返回数据的类型</li>
+<li>返回的数据</li>
+</ol>
+<p>所以将返回的数据正确绑定会数据类型即可.<br>这样就完成了一次服务代理.<br>服务请求商的信息由config文件提供, 调用服务的名称由用户输入, 在common模块中, 参数有用户提供.中间请求的构造, 有proxy类实现. </p>
+<h3 id="java-SPI"><a href="#java-SPI" class="headerlink" title="java SPI"></a>java SPI</h3><p>应该可以认为是java开发者中默认的一种开发模式. 所以在使用maven创建的项目中, ServiceLoader会自动加载在resources&#x2F;META-INF下的的service文件. 当然加载的是引入依赖jar包下的配置文件.</p>
+<p>要注意Serializer只是其中的一个包, 可以通过加载不同类型的SPI包, 进行调用.</p>
+<h3 id="序列化器与SPI总结"><a href="#序列化器与SPI总结" class="headerlink" title="序列化器与SPI总结"></a>序列化器与SPI总结</h3><p>使用不同的序列化器可以获得不同的性能, 使用者可以根据业务需求调用不同的序列化器进行传输数据.<br>通过一个SPILoader将所有SPI接口载入, 再通过相关配置文件读取到实现类存储的路径, 将其class文件加载进map中, 通过在具体使用时, 通过反射, 将其实例化,进行调用.</p>
+<h3 id="一个小bug"><a href="#一个小bug" class="headerlink" title="一个小bug"></a>一个小bug</h3><p>在编写的时候会使用到一个注解<code>@slf4j</code>这是一个日志库, 用于快速的编写一些日志语句. 但是需要在项目中引入包, 但是在项目中一开始我引入的是<code>slf4j-api</code>, 其实就只是引入了接口, 还需要引入相关的实现包对接口进行实现.</p>
+<h2 id="注册中心"><a href="#注册中心" class="headerlink" title="注册中心"></a>注册中心</h2><p>同一个服务, 可以有不同的提供者, 一方面可以减轻服务提供者的压力, 另一方面也可以根据选择不同服务者, 保障服务的稳定.</p>
+<p>其本质就是要在发送RPC请求时, 确认, 应该将这个请求发送给谁. 通过询问注册中心, 进行合理的请求.</p>
+<p>对于etcd的管理, 和mysql有点不一样. 其本质就是一个大型的树形结构. 这个树形结构只在叶子节点存储数据. 同时就它提供的几个操作脚本也让我觉得它的操作逻辑有点不一样. etcd脚本只是启动了相关的服务, 而需要使用etcdctl脚本进行交互, 还有一个脚本进行测试好像. 和其他服务启动后会有个 shell不是很一样. 感觉也体现了它的轻量化吗?</p>
+<p>在使用jetcd操作时, 一开始的逻辑有些让我看不懂. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Client client;</span><br><span class="line"><span class="keyword">private</span> KV kvClient;</span><br></pre></td></tr></table></figure>
+
+<p>两个client属实让我没有见过. 因为一般服务都是直接通过不同的命令进行不同的功能的. 通过仔细阅读下面的代码才能理解其中一二.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建一个etcd的client端与etcd服务端进行交互</span></span><br><span class="line"><span class="comment">     * 这个client相当于是一个总的交互客户端. 和其设计思路有关.</span></span><br><span class="line"><span class="comment">     * 比如直接通过etcd启动的就是服务, 而需要通过etcdctl脚本才能进行值交互.</span></span><br><span class="line"><span class="comment">     * 通过client获取kvclient, leaseclient这些特殊工作的client</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Client client;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 由于很多的方法都需要使用到kvclient(应该也就是设置键值对的交互client)所以选择将这个client设置成了一个类变量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> KV kvClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*从这个init中可以看出, client相当于是一个交互的总窗口, 可以通过这个交互窗口创建不同功能的代理.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">(RegistryConfig registryConfig)</span> &#123;</span><br><span class="line">        client = Client.builder().endpoints(registryConfig.getAddress())</span><br><span class="line">                .connectTimeout(Duration.ofMillis(registryConfig.getTimeout())) <span class="comment">//使用Duration将Long转化为Millis单位毫秒</span></span><br><span class="line">                .build();</span><br><span class="line">        kvClient = client.getKVClient();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">huning</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">http://example.com/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Hgame2025赛后学习</div></div><div class="info-2"><div class="info-item-1">Hgame2025赛后学习​	在发现自己的网络安全知识非常的低下后，也就不再现在ctf这条赛道上进行苦卷了，更多地把他看作是各种高级封装开发外的对计算机技术底层的一种兴趣认知。所以也不太好意思说这是我的赛后总结, 毕竟也就做出来那么两道题, 其他的就根本不行了, 可见和众多师傅相比我的计算机水平十分的有限, 所以就把这比赛当作是认知新技术的一种契机了. webBandBomb做题经历​	第一次尝试web的题, 最终还是没有做出来. 通过阅读给出的服务器代码, 可以知道有一个接口/rename在后面的使用中应该会有用处, 推测可以根据请求对相关文件进行更改. 由于做misc的经验, 所以我以为会有一个相关的flag文件放在服务器上, 需要更改使其进行显示. 但是由于没有学过ejs的技术, 所以完全不知道这道题的用意了. ​	同时, 在为运行中的web服务设置环境变量也属于是在我的技术水平之外了. 相关细节​	通过阅读服务的代码, 可以知道, template的名字为motis同时, 是处在默认的ejs文件夹下的, 所有做题思路是自己编写相关的服务器文件,...</div></div></div></a><a class="pagination-related" href="/2025/05/06/Leetcode&amp;%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%9D%E8%80%83/" title="Leetcode&amp;洛谷刷题记录与思考"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Leetcode&洛谷刷题记录与思考</div></div><div class="info-2"><div class="info-item-1">Leetcode&amp;&amp;洛谷刷题记录与思考p 7517题目链接：  对于第一篇题解的理解。 ··· 12345678910111213141516171819202122232425262728293031323334353637#include&lt;bits/stdc++.h&gt;#define ll long long#define il inlineusing namespace std;const int N=5e5+10;int read()&#123;//没有多大用的快读    int f=1,s=0;    char x=getchar();    while(x&lt;&#x27;0&#x27;||x&gt;&#x27;9&#x27;)&#123;        if(x==&#x27;-&#x27;) f=-1;        x=getchar();    &#125;    while(x&gt;=&#x27;0&#x27;&amp;&amp;x&lt;=&#x27;9&#x27;)&#123;       ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">huning</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">手写RPC框架学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRPC"><span class="toc-number">1.1.</span> <span class="toc-text">什么是RPC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8ERPC%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="toc-number">1.2.</span> <span class="toc-text">关于RPC的一些问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yu-RPC%E7%AE%80%E6%98%93%E7%89%88"><span class="toc-number">1.3.</span> <span class="toc-text">yu-RPC简易版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">初始化结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#common"><span class="toc-number">1.3.2.</span> <span class="toc-text">common</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EJava%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8C%85"><span class="toc-number">1.3.3.</span> <span class="toc-text">关于Java的一些包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lombok"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">lombok</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hutool"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">hutool</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RPC%E6%A1%86%E6%9E%B6%E4%B8%ADprovider%E6%96%B9%E9%9D%A2"><span class="toc-number">1.3.4.</span> <span class="toc-text">RPC框架中provider方面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E7%9A%84%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.3.5.</span> <span class="toc-text">全局配置的添加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mock%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.3.6.</span> <span class="toc-text">mock服务的添加</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E5%89%8D%E6%88%91%E7%90%86%E8%A7%A3%E7%9A%84mock%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">目前我理解的mock服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Econsumer%E7%AB%AF%E7%9A%84%E6%9C%8D%E5%8A%A1%E4%BB%A3%E7%90%86"><span class="toc-number">1.3.7.</span> <span class="toc-text">关于consumer端的服务代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E8%AF%B7%E6%B1%82"><span class="toc-number">1.3.7.1.</span> <span class="toc-text">静态请求</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-SPI"><span class="toc-number">1.3.8.</span> <span class="toc-text">java SPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%99%A8%E4%B8%8ESPI%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.9.</span> <span class="toc-text">序列化器与SPI总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%B0%8Fbug"><span class="toc-number">1.3.10.</span> <span class="toc-text">一个小bug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="toc-number">1.4.</span> <span class="toc-text">注册中心</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/06/Leetcode&amp;%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%9D%E8%80%83/" title="Leetcode&amp;洛谷刷题记录与思考">Leetcode&amp;洛谷刷题记录与思考</a><time datetime="2025-05-06T10:47:42.000Z" title="Created 2025-05-06 18:47:42">2025-05-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="手写RPC框架学习">手写RPC框架学习</a><time datetime="2025-05-05T06:12:50.000Z" title="Created 2025-05-05 14:12:50">2025-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习">Hgame2025赛后学习</a><time datetime="2025-03-07T08:45:22.000Z" title="Created 2025-03-07 16:45:22">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Go%E5%85%AB%E8%82%A1/" title="Go八股">Go八股</a><time datetime="2025-03-07T08:43:36.000Z" title="Created 2025-03-07 16:43:36">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/05/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8D%A3%E9%BC%93%E6%8C%87%E5%8C%97/" title="Linux云服务器捣鼓指北">Linux云服务器捣鼓指北</a><time datetime="2025-03-05T06:08:52.000Z" title="Created 2025-03-05 14:08:52">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By huning</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Go八股 | huning's hut</title><meta name="author" content="huning"><meta name="copyright" content="huning"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Go八股有限状态机也叫有限自动状态机, 写过dp的话, 其实就说明已经用到过了, 本质上就是一个状态转换成另一个状态, 状态之间可以双向也可以单向, 同时也有纯粹的只进不出的状态, 也许是故意设计成这样的, 避免一个错误产生后, 程序仍然继续运行, 感觉会用在一些比较特殊的业务场景, 需要重新启动估计. 对于不需要重新启动的业务, 感觉在加一个处理异常的状态, 再重新转换回正常的状态即可.参考这篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go八股">
+<meta property="og:url" content="http://example.com/2025/03/07/Go%E5%85%AB%E8%82%A1/index.html">
+<meta property="og:site_name" content="huning&#39;s hut">
+<meta property="og:description" content="Go八股有限状态机也叫有限自动状态机, 写过dp的话, 其实就说明已经用到过了, 本质上就是一个状态转换成另一个状态, 状态之间可以双向也可以单向, 同时也有纯粹的只进不出的状态, 也许是故意设计成这样的, 避免一个错误产生后, 程序仍然继续运行, 感觉会用在一些比较特殊的业务场景, 需要重新启动估计. 对于不需要重新启动的业务, 感觉在加一个处理异常的状态, 再重新转换回正常的状态即可.参考这篇">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg">
+<meta property="article:published_time" content="2025-03-07T08:43:36.000Z">
+<meta property="article:modified_time" content="2025-05-06T11:56:52.000Z">
+<meta property="article:author" content="huning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Go八股",
+  "url": "http://example.com/2025/03/07/Go%E5%85%AB%E8%82%A1/",
+  "image": "https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg",
+  "datePublished": "2025-03-07T08:43:36.000Z",
+  "dateModified": "2025-05-06T11:56:52.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "huning",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://s2.loli.net/2024/06/06/Z9Iz2rNsJq7ihRA.jpg"><link rel="canonical" href="http://example.com/2025/03/07/Go%E5%85%AB%E8%82%A1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Go八股',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://s2.loli.net/2025/05/06/vZgaW8w42hcCjDm.png);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2024/06/06/9e4chpZGmvuM8CT.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">huning's hut</span></a><a class="nav-page-title" href="/"><span class="site-name">Go八股</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Go八股</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-03-07T08:43:36.000Z" title="Created 2025-03-07 16:43:36">2025-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-05-06T11:56:52.000Z" title="Updated 2025-05-06 19:56:52">2025-05-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Go八股"><a href="#Go八股" class="headerlink" title="Go八股"></a>Go八股</h1><h2 id="有限状态机"><a href="#有限状态机" class="headerlink" title="有限状态机"></a>有限状态机</h2><p>也叫有限自动状态机, 写过dp的话, 其实就说明已经用到过了, 本质上就是一个状态转换成另一个状态, 状态之间可以双向也可以单向, 同时也有纯粹的只进不出的状态, 也许是故意设计成这样的, 避免一个错误产生后, 程序仍然继续运行, 感觉会用在一些比较特殊的业务场景, 需要重新启动估计. 对于不需要重新启动的业务, 感觉在加一个处理异常的状态, 再重新转换回正常的状态即可.参考这篇文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/liqiangeastsun/article/details/118932263">有限状态机FSM(finite state machine) 一_fsm statemachine-CSDN博客</a></p>
+<p>同时文章中提到了, 如果只是使用<code>if-else</code>语句进行判断, 最后会造成代码的不可读性. 通过使用一个通用的方法, 是比较好的办法. 通过定义一个抽象类<code>statusBase</code>, 在其中定义三个抽象方法<code>OnEnter</code> , <code>OnExecute</code>和<code>OnExit</code>. 对于每个状态去具体的实现这是三个方法从而实现不同状态的转移, 提高代码的可读性.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">StateBase</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当前类型</span></span><br><span class="line">    <span class="keyword">protected</span> StateEnum _state;</span><br><span class="line">    <span class="comment">// 状态转换事件，要转换状态的通知</span></span><br><span class="line">    <span class="keyword">protected</span> Action&lt;StateEnum&gt; _transitionEvent;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">StateBase</span><span class="params">()</span>  &#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进入该状态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">OnEnter</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 执行该状态的行为</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">OnExecute</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 退出该状态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">OnExit</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回当前类型</span></span><br><span class="line">    <span class="keyword">public</span> StateEnum State</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; <span class="keyword">return</span> _state; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">SetTransitionEvent</span><span class="params">(Action&lt;StateEnum&gt; transitionEvent)</span></span><br><span class="line">    &#123;</span><br><span class="line">        _transitionEvent = transitionEvent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h2><p>​	由于后端处理的很多都是与数据相关, 但是, 在当今的互联网服务中, 很明显, 没有办法再使用单一的服务端提供服务, 一方面是能够处理的请求实在是有限, 同时, 将所有的数据都保存在同一 服务端, 万一服务器崩溃就会导致服务不可用, 同时, 数据也可能会丢失, 所以, 目前服务集群部署更为常见. 但是为了提供相同的服务, 就需要保证每个服务器能够获取或者存储的数据应该是一致的. 当然根据业务场景可能对数据的要求并不一样。</p>
+<ol>
+<li><p>强一致性</p>
+<p>要求在任何时刻, 系统中所有的副本都是一样的, 对数据的一致性具有极高的要求, 在比如银行的转账系统等比较常见.</p>
+</li>
+<li><p>最终一致性</p>
+<p>允许在短时内出现数据不一致的情况, 通过使所有节点的数据解决.</p>
+</li>
+</ol>
+<h2 id="RBAC-Role-Based-Access-Control-基于角色的访问控制"><a href="#RBAC-Role-Based-Access-Control-基于角色的访问控制" class="headerlink" title="RBAC(Role-Based Access Control) 基于角色的访问控制"></a>RBAC(Role-Based Access Control) 基于角色的访问控制</h2><p>听这很高大上的名词, 刚看到我也懵了, 也难怪参考博客的博主面试的时候被问懵了. 其实这东西在平常的已经用过很多遍了.</p>
+<p>简单的来说, 就是对于每个用户逐一赋予相应的权限任务量实在是太大了. 其实, 大部分用户能够获得的权限是差不多的, 所以只要区分用户对于服务来说到底是怎样的关系, 也就是确定用户在服务中的角色, 相同的角色, 意味着用户能够用到的权限是一样的. 比如<code>消费者</code>, <code>商家</code>, <code>平台管理</code>之类的. 其实一想, 这就与平时的面向对象编程没有什么区别.</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/90f4fbd9dcb2eae0683d0e4f4789f859.png"></p>
+<p>上面这张别人做的图将RBAC的优势总结的非常的好, 一看就能理解.</p>
+<p>当然我说的这种RBAC还是最基础的, 对于升级款的, 只能说非常的高端</p>
+<p>RBAC0（Core RBAC）：最简单的RBAC形式，员工使用角色来获取权限（使用最多）。</p>
+<p>基本模型有三个元素：用户、角色和权限。模型设计基于“多对多”原则，即多个用户可以具有相同的角色，一个用户可以具有多个角色。同样，您可以将同一权限分配给多个角色，也可以将同一角色分配给多个权限。</p>
+<p>RBAC1（Hierarchical RBAC）：分层，建立在FlatRBAC规则之上，增加角色分层。</p>
+<p>添加了第四个组件-层次结构，它定义了不同角色之间的资历关系。通过允许高级角色自动获取下级角色的权限，可以消除冗余，例如在角色重叠时必须指定某些权限。</p>
+<p>RBAC2（Static separation of duty (SSD) relations）：受约束的，建立在分层RBAC0之上，并增加职责分离。</p>
+<p>为了在存在利益冲突策略的情况下提供帮助，将根据用户分配添加角色之间的关系。例如，作为一个角色的成员的用户将无法被指派为具有利益冲突的角色的成员。</p>
+<p>RBAC3（Dynamic separation of duty (DSD) relations）：RBAC3&#x3D;RBAC1+RBAC2</p>
+<p>与SSD一样，DSD限制了可用的用户权限，但基于不同的上下文。例如，根据会话期间执行的任务，用户可能需要不同级别的访问，DSD限制会话期间激活的权限。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62006803/article/details/133962328">https://blog.csdn.net/m0_62006803/article/details/133962328</a></p>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p>​	其实已经用过很多次了, 但是其实对他的构成还不是很了解, 没想到这个也会被考, 感觉这八股是和算法一样学不完了.<br>了解JWT感觉还得先了解session.</p>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>对于一个session其实具体存储在服务端, 这也是为什么, 如果在一个服务器上存储了大量的用户登录信息会造成服务器性能的下降. </p>
+<p>在服务器上存储的session具有一个id值, 而当产生了session后, 服务器会将session的id放入cookie进行返回, 当客户端请求时, 将sessionid放入cookie, 然后服务端进行检查, 然后服务可以根据session进行一些特殊的记录, 对用户进行有状态记录.</p>
+<h3 id="JWT结构"><a href="#JWT结构" class="headerlink" title="JWT结构"></a>JWT结构</h3><p>以前还真没想过, 都是直接将先关的claim直接填写好就丢到函数里面进行生成返回了, 设置连JWT的传输安全都没考虑过. </p>
+<p>JWT 通常是这样的：<code>xxxxx.yyyyy.zzzzz</code></p>
+<ol>
+<li>HEADER 表头, 包括了令牌的类型和签名使用的算法等</li>
+<li>Payload 负载, 包含了一些非敏感信息</li>
+<li>Signature 签名 将上面两部分的编码后信息与指定的secret进行相对应的算法加密生成相对应的数字签名, 用于确保传输过程中数据没有被更改</li>
+</ol>
+<p><img src="https://oss.javaguide.cn/javaguide/system-design/jwt/jwt-composition.png"></p>
+<h2 id="go语言垃圾回收"><a href="#go语言垃圾回收" class="headerlink" title="go语言垃圾回收"></a>go语言垃圾回收</h2><p>其实还是之前就接触过的东西, 只不过换了一种名词进行表达, 同时还将其定义更加明确化了而已.</p>
+<p>对于一个程序运行时, 动态使用的最多的应该就是内存, 不同, 存放不同的数据. 但是有些数据很明显, 在经过一段时间的使用后, 其实就没有继续使用的意义了. 但是, 对于大部分语言来说, 都为程序员编程提供的自申请的一些地址空间. 一般将内存划分为堆空间和栈空间. 对于堆空间, 是可以申请的空间, 而栈空间一般直接由编译器进行管理.</p>
+<p>当在栈空间内申请内存后, 使用一个指针表明其位置, 然后就可以使用了. 但是当后面这一块内存空间可能就不需要使用了, 但是, 如果只是直接将指向的指针改为新的地址, 那么原来的这一块地址就无法追踪, 相当于垃圾没有进行回收. 对于持续运行的程序来说, 如果没有进行重启, 那么这块地址就无法进行释放, 相当于对机器来说, 这块内存就消失了, 也就是<code>内存泄漏</code>.</p>
+<h3 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h3><p>目前使用的好像是所谓的三色法+混合屏障机制. 其实就三色法来说还是比较好理解的.</p>
+<p>垃圾回收机制最需要解决的就是内存泄漏, 而泄漏的内存都有一个特点, 就是不可达. 那么自然思路就是找到所有不可达的内存区, 将其标为可用就行了, 当然, 反向一下就是找到所有可达的内存, 那么剩下的就是不可达的. </p>
+<p>从根节点出发, 将所能抵达的内存块标记为灰色, 然后再从灰色的内存块出发, 将能到达的内存标为灰色, 将原来灰色的内存块标记为黑色, 重复执行, 直到最后没有灰色的内存块存在, 再执行回收机制, 将所有的不可达内存块即白色内存块释放. 当然这其中还插入了混合屏障机制, 当然我目前还没有完全理解.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">huning</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/07/Go%E5%85%AB%E8%82%A1/">http://example.com/2025/03/07/Go%E5%85%AB%E8%82%A1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/05/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8D%A3%E9%BC%93%E6%8C%87%E5%8C%97/" title="Linux云服务器捣鼓指北"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Linux云服务器捣鼓指北</div></div><div class="info-2"><div class="info-item-1">Linux云服务器捣鼓指北个人前言在想到写着捣鼓的经历记录的时候, 由于自己不成熟的操作, 和健忘的记性, 已经多次将自己的服务器系统重置, 已经重置第二遍哩! 本着认真工作, 踏实学习的原则, 本人认为, 这样对待服务器是十分不可取的, 毕竟目前这台服务器还是我自己的实验型服务器, 我可以随便折腾, 同时我在服务器上也没有重要文件或者是什么高端的服务, 所以我可以没有任何心理负担的删库跑路, 但是先要成为一个优秀的对对服务有用的人, 这样的做法显然是可耻的. 对此,本人在此对每次进行的操作进行一定的记录和思考, 提供学习和参考. 同时也对看到这篇文章的小白提供一个思路. 通过远程SSH连接使用云服务器本人遵从前辈的教导,通过使用远程的SSH远程连接服务使用云服务器. 使用Xshell新建会话,然后通过root用户进行登录.当然输入的密码就是我自己服务器设置的密码. 但是要在此注意, 这样登录进去的用户肯定是root用户, root用户在进行操作的时具有很强的危险性, 一般需要新建用户进行操作,同时需要更改权限. 部署网站服务器核心跟着鱼皮大佬的教程,...</div></div></div></a><a class="pagination-related" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">Hgame2025赛后学习</div></div><div class="info-2"><div class="info-item-1">Hgame2025赛后学习​	在发现自己的网络安全知识非常的低下后，也就不再现在ctf这条赛道上进行苦卷了，更多地把他看作是各种高级封装开发外的对计算机技术底层的一种兴趣认知。所以也不太好意思说这是我的赛后总结, 毕竟也就做出来那么两道题, 其他的就根本不行了, 可见和众多师傅相比我的计算机水平十分的有限, 所以就把这比赛当作是认知新技术的一种契机了. webBandBomb做题经历​	第一次尝试web的题, 最终还是没有做出来. 通过阅读给出的服务器代码, 可以知道有一个接口/rename在后面的使用中应该会有用处, 推测可以根据请求对相关文件进行更改. 由于做misc的经验, 所以我以为会有一个相关的flag文件放在服务器上, 需要更改使其进行显示. 但是由于没有学过ejs的技术, 所以完全不知道这道题的用意了. ​	同时, 在为运行中的web服务设置环境变量也属于是在我的技术水平之外了. 相关细节​	通过阅读服务的代码, 可以知道, template的名字为motis同时, 是处在默认的ejs文件夹下的, 所有做题思路是自己编写相关的服务器文件,...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">huning</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Go%E5%85%AB%E8%82%A1"><span class="toc-number">1.</span> <span class="toc-text">Go八股</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">1.1.</span> <span class="toc-text">有限状态机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">一致性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RBAC-Role-Based-Access-Control-%E5%9F%BA%E4%BA%8E%E8%A7%92%E8%89%B2%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">RBAC(Role-Based Access Control) 基于角色的访问控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-number">1.4.</span> <span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#session"><span class="toc-number">1.4.1.</span> <span class="toc-text">session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.2.</span> <span class="toc-text">JWT结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#go%E8%AF%AD%E8%A8%80%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-number">1.5.</span> <span class="toc-text">go语言垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">1.5.1.</span> <span class="toc-text">垃圾回收机制</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/06/Leetcode&amp;%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%9D%E8%80%83/" title="Leetcode&amp;洛谷刷题记录与思考">Leetcode&amp;洛谷刷题记录与思考</a><time datetime="2025-05-06T10:47:42.000Z" title="Created 2025-05-06 18:47:42">2025-05-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="手写RPC框架学习">手写RPC框架学习</a><time datetime="2025-05-05T06:12:50.000Z" title="Created 2025-05-05 14:12:50">2025-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习">Hgame2025赛后学习</a><time datetime="2025-03-07T08:45:22.000Z" title="Created 2025-03-07 16:45:22">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Go%E5%85%AB%E8%82%A1/" title="Go八股">Go八股</a><time datetime="2025-03-07T08:43:36.000Z" title="Created 2025-03-07 16:43:36">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/05/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8D%A3%E9%BC%93%E6%8C%87%E5%8C%97/" title="Linux云服务器捣鼓指北">Linux云服务器捣鼓指北</a><time datetime="2025-03-05T06:08:52.000Z" title="Created 2025-03-05 14:08:52">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By huning</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
