@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hgame2025赛后学习 | huning's hut</title><meta name="author" content="huning"><meta name="copyright" content="huning"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Hgame2025赛后学习​	在发现自己的网络安全知识非常的低下后，也就不再现在ctf这条赛道上进行苦卷了，更多地把他看作是各种高级封装开发外的对计算机技术底层的一种兴趣认知。所以也不太好意思说这是我的赛后总结, 毕竟也就做出来那么两道题, 其他的就根本不行了, 可见和众多师傅相比我的计算机水平十分的有限, 所以就把这比赛当作是认知新技术的一种契机了. webBandBomb做题经历​	第一次尝试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hgame2025赛后学习">
+<meta property="og:url" content="http://example.com/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="huning&#39;s hut">
+<meta property="og:description" content="Hgame2025赛后学习​	在发现自己的网络安全知识非常的低下后，也就不再现在ctf这条赛道上进行苦卷了，更多地把他看作是各种高级封装开发外的对计算机技术底层的一种兴趣认知。所以也不太好意思说这是我的赛后总结, 毕竟也就做出来那么两道题, 其他的就根本不行了, 可见和众多师傅相比我的计算机水平十分的有限, 所以就把这比赛当作是认知新技术的一种契机了. webBandBomb做题经历​	第一次尝试">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg">
+<meta property="article:published_time" content="2025-03-07T08:45:22.000Z">
+<meta property="article:modified_time" content="2025-05-06T11:56:52.000Z">
+<meta property="article:author" content="huning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hgame2025赛后学习",
+  "url": "http://example.com/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/",
+  "image": "https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg",
+  "datePublished": "2025-03-07T08:45:22.000Z",
+  "dateModified": "2025-05-06T11:56:52.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "huning",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://s2.loli.net/2024/06/06/Z9Iz2rNsJq7ihRA.jpg"><link rel="canonical" href="http://example.com/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hgame2025赛后学习',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(https://s2.loli.net/2025/05/06/vZgaW8w42hcCjDm.png);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2024/06/06/9e4chpZGmvuM8CT.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">huning's hut</span></a><a class="nav-page-title" href="/"><span class="site-name">Hgame2025赛后学习</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Hgame2025赛后学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2025-03-07T08:45:22.000Z" title="Created 2025-03-07 16:45:22">2025-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2025-05-06T11:56:52.000Z" title="Updated 2025-05-06 19:56:52">2025-05-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Hgame2025赛后学习"><a href="#Hgame2025赛后学习" class="headerlink" title="Hgame2025赛后学习"></a>Hgame2025赛后学习</h1><p>​	在发现自己的网络安全知识非常的低下后，也就不再现在ctf这条赛道上进行苦卷了，更多地把他看作是各种高级封装开发外的对计算机技术底层的一种兴趣认知。所以也不太好意思说这是我的赛后总结, 毕竟也就做出来那么两道题, 其他的就根本不行了, 可见和众多师傅相比我的计算机水平十分的有限, 所以就把这比赛当作是认知新技术的一种契机了.</p>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="BandBomb"><a href="#BandBomb" class="headerlink" title="BandBomb"></a>BandBomb</h3><h4 id="做题经历"><a href="#做题经历" class="headerlink" title="做题经历"></a>做题经历</h4><p>​	第一次尝试web的题, 最终还是没有做出来. 通过阅读给出的服务器代码, 可以知道有一个接口<code>/rename</code>在后面的使用中应该会有用处, 推测可以根据请求对相关文件进行更改. 由于做misc的经验, 所以我以为会有一个相关的flag文件放在服务器上, 需要更改使其进行显示. 但是由于没有学过<code>ejs</code>的技术, 所以完全不知道这道题的用意了.</p>
+<p>​	同时, 在为运行中的web服务设置环境变量也属于是在我的技术水平之外了.</p>
+<h4 id="相关细节"><a href="#相关细节" class="headerlink" title="相关细节"></a>相关细节</h4><p>​	通过阅读服务的代码, 可以知道, template的名字为<code>motis</code>同时, 是处在默认的ejs文件夹下的, 所有做题思路是自己编写相关的服务器文件, 然后通过<code>/rename</code>接口对原来的服务器文件进行替换, 自己编写的服务器系统需要读取服务器运行设置的flag环境变量, 将其返回即可.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//题目提供的服务器源代码</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">&#x27;multer&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/static&#x27;</span>, express.<span class="title function_">static</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">json</span>());</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> storage = multer.<span class="title function_">diskStorage</span>(&#123;</span><br><span class="line">  <span class="attr">destination</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> uploadDir = <span class="string">&#x27;uploads&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!fs.<span class="title function_">existsSync</span>(uploadDir)) &#123;</span><br><span class="line">      fs.<span class="title function_">mkdirSync</span>(uploadDir);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">cb</span>(<span class="literal">null</span>, uploadDir);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">filename</span>: <span class="function">(<span class="params">req, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">cb</span>(<span class="literal">null</span>, file.<span class="property">originalname</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> upload = <span class="title function_">multer</span>(&#123; </span><br><span class="line">  <span class="attr">storage</span>: storage,</span><br><span class="line">  <span class="attr">fileFilter</span>: <span class="function">(<span class="params">_, file, cb</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!file.<span class="property">originalname</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">cb</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;无效的文件名&#x27;</span>), <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">cb</span>(<span class="literal">null</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="title function_">cb</span>(<span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;文件处理错误&#x27;</span>), <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> uploadsDir = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;uploads&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (!fs.<span class="title function_">existsSync</span>(uploadsDir)) &#123;</span><br><span class="line">    fs.<span class="title function_">mkdirSync</span>(uploadsDir);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fs.<span class="title function_">readdir</span>(uploadsDir, <span class="function">(<span class="params">err, files</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">render</span>(<span class="string">&#x27;mortis&#x27;</span>, &#123; <span class="attr">files</span>: [] &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="title function_">render</span>(<span class="string">&#x27;mortis&#x27;</span>, &#123; <span class="attr">files</span>: files &#125;);  <span class="comment">//将读取到的参数放到“mortis”的模板中</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/upload&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  upload.<span class="title function_">single</span>(<span class="string">&#x27;file&#x27;</span>)(req, res, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: err.<span class="property">message</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!req.<span class="property">file</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;没有选择文件&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="title function_">json</span>(&#123; </span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;文件上传成功&#x27;</span>,</span><br><span class="line">      <span class="attr">filename</span>: req.<span class="property">file</span>.<span class="property">filename</span> </span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/rename&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; oldName, newName &#125; = req.<span class="property">body</span>;</span><br><span class="line">  <span class="keyword">const</span> oldPath = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;uploads&#x27;</span>, oldName);</span><br><span class="line">  <span class="keyword">const</span> newPath = path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;uploads&#x27;</span>, newName);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!oldName || !newName) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27; &#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fs.<span class="title function_">rename</span>(oldPath, newPath, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27; &#x27;</span> + err.<span class="property">message</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="title function_">json</span>(&#123; <span class="attr">message</span>: <span class="string">&#x27; &#x27;</span> &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(port, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`服务器运行在 http://localhost:<span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">huning</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/">http://example.com/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/07/Go%E5%85%AB%E8%82%A1/" title="Go八股"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">Go八股</div></div><div class="info-2"><div class="info-item-1">Go八股有限状态机也叫有限自动状态机, 写过dp的话, 其实就说明已经用到过了, 本质上就是一个状态转换成另一个状态, 状态之间可以双向也可以单向, 同时也有纯粹的只进不出的状态, 也许是故意设计成这样的, 避免一个错误产生后, 程序仍然继续运行, 感觉会用在一些比较特殊的业务场景, 需要重新启动估计. 对于不需要重新启动的业务, 感觉在加一个处理异常的状态, 再重新转换回正常的状态即可.参考这篇文章有限状态机FSM(finite state machine) 一_fsm statemachine-CSDN博客 同时文章中提到了, 如果只是使用if-else语句进行判断, 最后会造成代码的不可读性. 通过使用一个通用的方法, 是比较好的办法. 通过定义一个抽象类statusBase, 在其中定义三个抽象方法OnEnter , OnExecute和OnExit. 对于每个状态去具体的实现这是三个方法从而实现不同状态的转移, 提高代码的可读性. 1234567891011121314151617181920212223242526272829public abstract...</div></div></div></a><a class="pagination-related" href="/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="手写RPC框架学习"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">手写RPC框架学习</div></div><div class="info-2"><div class="info-item-1">手写RPC框架学习什么是RPCRPC(Remote Procedure Call)从字面意思就是远程程序请求, 我的理解就是, 将能够分离的服务进行解耦合, 暴露出接口, 让其他服务能够通过网络直接请求调用. 能够降低服务之间的耦合度, 防止崩溃, 同时提高服务的可维护程度. 通过RPC框架甚至不需要构建http请求, 相当与是RPC框架提供了一个方法, 隐藏了构建http请求的过程, 只需要关注传入的参数, 和传回的数据就足够了.  关于RPC的一些问题目前我理解的RPC框架相当于是一个引入的包, 通过调用相关的方法就能够直接访问相关的服务, 当然对于服务方应该也是使用相同的协议的. 写RPC框架就像是在写一个现成的包一样, 其他服务通过应用这个包, 然后使用这个包中的工具, 就可以实现RPC的功能. yu-RPC简易版初始化结构构建了四个模块exam-consumer,exam-provider, example-common, yu-rpc-easy. 取模拟三个端口, 其中的common模块相当于是公共模块,  使用rpc框架构成服务, 在消费者和生产者之间提供桥梁,...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s2.loli.net/2025/05/06/dHhEmUxjBsNC4Fz.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">huning</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.</span> <span class="toc-text">Hgame2025赛后学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-number">1.1.</span> <span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BandBomb"><span class="toc-number">1.1.1.</span> <span class="toc-text">BandBomb</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%9A%E9%A2%98%E7%BB%8F%E5%8E%86"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">做题经历</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%BB%86%E8%8A%82"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">相关细节</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/06/Leetcode&amp;%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%E4%B8%8E%E6%80%9D%E8%80%83/" title="Leetcode&amp;洛谷刷题记录与思考">Leetcode&amp;洛谷刷题记录与思考</a><time datetime="2025-05-06T10:47:42.000Z" title="Created 2025-05-06 18:47:42">2025-05-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/05/%E6%89%8B%E5%86%99RPC%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="手写RPC框架学习">手写RPC框架学习</a><time datetime="2025-05-05T06:12:50.000Z" title="Created 2025-05-05 14:12:50">2025-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Hgame2025%E8%B5%9B%E5%90%8E%E5%AD%A6%E4%B9%A0/" title="Hgame2025赛后学习">Hgame2025赛后学习</a><time datetime="2025-03-07T08:45:22.000Z" title="Created 2025-03-07 16:45:22">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/Go%E5%85%AB%E8%82%A1/" title="Go八股">Go八股</a><time datetime="2025-03-07T08:43:36.000Z" title="Created 2025-03-07 16:43:36">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/05/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8D%A3%E9%BC%93%E6%8C%87%E5%8C%97/" title="Linux云服务器捣鼓指北">Linux云服务器捣鼓指北</a><time datetime="2025-03-05T06:08:52.000Z" title="Created 2025-03-05 14:08:52">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By huning</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
