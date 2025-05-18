@@ -102,6 +102,6 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: git@github.com:huningzizhitaibai/huning.github.io.git
+  repository: git@github.com:huningzizhitaibai/huningzizhitaibai.github.io.git
   branch: main
 
